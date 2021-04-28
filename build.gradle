@@ -1,0 +1,18 @@
+plugins {
+    id 'java'
+}
+
+group 'downloader'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 11
+targetCompatibility = 11
+
+repositories {
+    mavenCentral()
+    mavenLocal()
+}
+
+dependencies {
+    implementation 'ch.qos.logback:logback-classic:1.2.3'
+}
