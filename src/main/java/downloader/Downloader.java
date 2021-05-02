@@ -53,7 +53,7 @@ public class Downloader {
             }
         } catch (Exception ex) {
 
-            downloadBuilder.getDownloadObserver().forEach(c -> c.onFinish(new DownLoadFinish(-1, downloadBuilder.getFileName(), true, true)));
+            downloadBuilder.getDownloadObserver().forEach(c -> c.onFinish(new DownLoadFinish(-1, downloadBuilder.getPath(), downloadBuilder.getFileName(), true, true)));
 
             if (ex.getClass().equals(MalformedURLException.class)) {
                 downloadBuilder.getErrorConsumer().accept(DownloadError.httpError(150, "The URL is not valid or is incorrect."));
@@ -109,7 +109,7 @@ public class Downloader {
                     cache = now;
                 }
                 downloadBuilder.getDownloadObserver().forEach(c ->
-                        c.onFinish(new DownLoadFinish(stream.getSize(), downloadBuilder.getFileName(), true, true)));
+                        c.onFinish(new DownLoadFinish(stream.getSize(), downloadBuilder.getPath(),downloadBuilder.getFileName(), true, true)));
 
                 if (connection != null)
                     connection.disconnect();
@@ -124,14 +124,14 @@ public class Downloader {
             }
         } catch (MalformedURLException exception) {
             downloadBuilder.getDownloadObserver().forEach(c ->
-                    c.onFinish(new DownLoadFinish(-1, downloadBuilder.getFileName(), true, true)));
+                    c.onFinish(new DownLoadFinish(-1, downloadBuilder.getPath() ,downloadBuilder.getFileName(), true, true)));
 
             downloadBuilder.getErrorConsumer().accept(DownloadError.httpError(101, "The URL is not valid or is incorrect."));
             downloadBuilder.getErrorConsumer().accept(DownloadError.Connection_Error);
 
         } catch (Exception exception) {
             downloadBuilder.getDownloadObserver().forEach(c ->
-                    c.onFinish(new DownLoadFinish(-1, downloadBuilder.getFileName(), true, true)));
+                    c.onFinish(new DownLoadFinish(-1, downloadBuilder.getPath(), downloadBuilder.getFileName(), true, true)));
 
             if (exception.getClass().equals(UnknownHostException.class)) {
                 downloadBuilder.getErrorConsumer().accept(DownloadError.httpError(100, "Check your internet connection."));
