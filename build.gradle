@@ -1,9 +1,13 @@
 plugins {
     id 'java'
+    id 'maven-publish'
 }
 
 group 'downloader'
 version '1.0-SNAPSHOT'
+
+String pass = property('MAVEN_PASSWORD')
+String maven_url = property('MAVEN_URL')
 
 sourceCompatibility = 11
 targetCompatibility = 11
@@ -15,4 +19,30 @@ repositories {
 
 dependencies {
     implementation 'ch.qos.logback:logback-classic:1.2.3'
+}
+
+publishing {
+    repositories {
+        maven {
+            url("$maven_url")
+            credentials {
+                username("myMavenRepo")
+                password("$pass")
+            }
+        }
+    }
+
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+
+            groupId group
+            artifactId "Downloader-API"
+            version version
+
+            pom.withXml {
+                asNode().appendNode('url', 'https://github.com/ErickFThomaz')
+            }
+        }
+    }
 }
