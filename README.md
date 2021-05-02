@@ -9,7 +9,7 @@ Maven
  <repositories>
         <repository>
             <id>myMavenRepo.read</id>
-            <url>https://repo.finnbot.tk/</url>
+            <url>http://repo.finnbot.tk/</url>
         </repository>
     </repositories>
 
@@ -24,7 +24,7 @@ Maven
 
 ```gradle
 repositories {
-    maven { url 'https://repo.finnbot.tk/' }
+    maven { url 'http://repo.finnbot.tk/' }
 }
 
 dependencies {
