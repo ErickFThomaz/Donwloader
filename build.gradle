@@ -1,10 +1,13 @@
 plugins {
     id 'java'
     id 'maven-publish'
+    id 'com.github.johnrengelman.shadow' version '6.1.0'
 }
 
 group 'downloader'
-version '1.0-SNAPSHOT'
+
+def ver = new Version(major: 1, minor: 0, revision: 0)
+version ver.toString()
 
 String pass = property('MAVEN_PASSWORD')
 String maven_url = property('MAVEN_URL')
@@ -19,6 +22,13 @@ repositories {
 
 dependencies {
     implementation 'ch.qos.logback:logback-classic:1.2.3'
+}
+
+shadowJar {
+    archiveClassifier.set(null)
+    archiveVersion = version
+    baseName("Downloader")
+    exclude 'module-info.class'
 }
 
 publishing {
@@ -44,5 +54,13 @@ publishing {
                 asNode().appendNode('url', 'https://github.com/ErickFThomaz')
             }
         }
+    }
+}
+
+class Version {
+    String major, minor, revision
+
+    String toString() {
+        return "${major}.${minor}.${revision}"
     }
 }
