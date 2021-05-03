@@ -6,7 +6,7 @@ plugins {
 
 group 'downloader'
 
-def ver = new Version(major: 1, minor: 0, revision: 0)
+def ver = new Version(major: 1, minor: 0, revision: 1)
 version ver.toString()
 
 String pass = property('MAVEN_PASSWORD')
@@ -14,15 +14,6 @@ String maven_url = property('MAVEN_URL')
 
 sourceCompatibility = 11
 targetCompatibility = 11
-
-repositories {
-    mavenCentral()
-    mavenLocal()
-}
-
-dependencies {
-
-}
 
 shadowJar {
     archiveClassifier.set(null)
