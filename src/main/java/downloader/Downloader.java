@@ -38,7 +38,7 @@ public class Downloader {
 
     public void asyncDownload() {
         ExecutorService threadPool = Executors.newFixedThreadPool(2, new DownloadThread());
-        Future<?> futureTask = threadPool.submit(this::download);
+        Future<?> ignored = threadPool.submit(this::download);
 
         threadPool.shutdown();
     }
@@ -84,7 +84,7 @@ public class Downloader {
 
                 ProgressObservableInputStream stream = new ProgressObservableInputStream(in, connection.getContentLength());
 
-                FileOutputStream out = new FileOutputStream(downloadBuilder.getPath() + "\\" + downloadBuilder.getFileName());
+                FileOutputStream out = new FileOutputStream(downloadBuilder.getPath() + System.getProperty("file.separator") + downloadBuilder.getFileName());
 
                 byte[] buffer = new byte[4096];
                 int read;
@@ -110,6 +110,9 @@ public class Downloader {
                 }
                 downloadBuilder.getDownloadObserver().forEach(c ->
                         c.onFinish(new DownLoadFinish(stream.getSize(), downloadBuilder.getPath(),downloadBuilder.getFileName(), true, true)));
+
+
+                out.flush();
 
                 if (connection != null)
                     connection.disconnect();

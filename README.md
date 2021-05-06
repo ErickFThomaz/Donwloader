@@ -2,6 +2,8 @@
 
 It is a simple library to download sync/async.
 
+Required java 11+
+
 Maven
 ========
 
@@ -17,7 +19,7 @@ Maven
         <dependency>
             <groupId>downloader</groupId>
             <artifactId>Downloader-API</artifactId>
-            <version>1.0.1</version>
+            <version>1.0.1.3</version>
         </dependency>
     </dependencies>
 ```
@@ -28,7 +30,7 @@ repositories {
 }
 
 dependencies {
- implementation 'downloader:Downloader-API:1.0.1'
+ implementation 'downloader:Downloader-API:1.0.1.3'
 }
 ```
 
