@@ -34,6 +34,36 @@ dependencies {
 }
 ```
 
+JitPack
+======
 
+```maven
+ <repositories>
+        <repository>
+            <id>myMavenRepo.read</id>
+            <url>http://repo.finnbot.tk/</url>
+        </repository>
+    </repositories>
+
+    <dependencies>
+        <dependency>
+            <groupId>downloader</groupId>
+            <artifactId>Downloader-API</artifactId>
+            <version>1.0.1.3</version>
+        </dependency>
+    </dependencies>
+```
+
+```gradle
+repositories {
+   repositories {
+			maven { url 'https://jitpack.io' }
+		}
+}
+
+dependencies {
+ implementation 'com.github.ErickFThomaz:Downloader:13c0063e14'
+}
+```
 
 
