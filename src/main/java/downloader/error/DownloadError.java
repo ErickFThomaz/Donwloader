@@ -13,7 +13,7 @@ public enum DownloadError {
 	}
 
 	public static DownloadError httpError(int code, String message){
-		var error = DownloadError.HTTP_Error;
+		DownloadError error = DownloadError.HTTP_Error;
 		error.setCode(code);
 		error.setMessage(message);
 		return error;
