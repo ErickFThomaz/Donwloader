@@ -9,8 +9,8 @@ group 'downloader'
 def ver = new Version(major: 1, minor: 0, revision: 1.3)
 version ver.toString()
 
-sourceCompatibility = 1.8
-targetCompatibility = 1.8
+sourceCompatibility = 11
+targetCompatibility = 11
 
 shadowJar {
     archiveClassifier.set(null)
@@ -24,5 +24,23 @@ class Version {
 
     String toString() {
         return "${major}.${minor}.${revision}"
+    }
+}
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            from components.java
+        }
+    }
+
+    repositories {
+        maven {
+            url property("repsyUrl")
+            credentials {
+                username property("repsyUsername")
+                password property("repsyPassword")
+            }
+        }
     }
 }
