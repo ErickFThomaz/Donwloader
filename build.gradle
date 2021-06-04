@@ -9,8 +9,8 @@ group 'downloader'
 def ver = new Version(major: 1, minor: 0, revision: 1.3)
 version ver.toString()
 
-sourceCompatibility = 11
-targetCompatibility = 11
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
 
 shadowJar {
     archiveClassifier.set(null)
