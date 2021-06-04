@@ -9,9 +9,6 @@ group 'downloader'
 def ver = new Version(major: 1, minor: 0, revision: 1.3)
 version ver.toString()
 
-String pass = property('MAVEN_PASSWORD')
-String maven_url = property('MAVEN_URL')
-
 sourceCompatibility = 11
 targetCompatibility = 11
 
@@ -20,32 +17,6 @@ shadowJar {
     archiveVersion = version
     baseName("Downloader")
     exclude 'module-info.class'
-}
-
-publishing {
-    repositories {
-        maven {
-            url("$maven_url")
-            credentials {
-                username("myMavenRepo")
-                password("$pass")
-            }
-        }
-    }
-
-    publications {
-        mavenJava(MavenPublication) {
-            from components.java
-
-            groupId group
-            artifactId "Downloader-API"
-            version version
-
-            pom.withXml {
-                asNode().appendNode('url', 'https://github.com/ErickFThomaz')
-            }
-        }
-    }
 }
 
 class Version {
