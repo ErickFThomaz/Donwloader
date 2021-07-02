@@ -30,7 +30,7 @@ repositories {
 }
 
 dependencies {
- implementation 'downloader:Downloader:1.0.1.3'
+ implementation 'downloader:Downloader:1.0.1.4'
 }
 ```
 
