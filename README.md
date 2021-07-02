@@ -19,7 +19,7 @@ Maven
         <dependency>
             <groupId>downloader</groupId>
             <artifactId>Downloader-API</artifactId>
-            <version>1.0.1.4</version>
+            <version>1.0.1.5</version>
         </dependency>
     </dependencies>
 ```
@@ -30,7 +30,7 @@ repositories {
 }
 
 dependencies {
- implementation 'downloader:Downloader:1.0.1.4'
+ implementation 'downloader:Downloader:1.0.1.5'
 }
 ```
 

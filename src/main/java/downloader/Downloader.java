@@ -44,7 +44,6 @@ public class Downloader {
 
     public void asyncDownload() {
         threadPool.submit(this::download);
-        threadPool.shutdown();
     }
 
     public void download() {
