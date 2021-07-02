@@ -5,7 +5,10 @@ import downloader.listener.DownLoadFinish;
 import downloader.listener.DownloadStatus;
 import downloader.utils.DownloadThread;
 import downloader.utils.ProgressObservableInputStream;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -15,9 +18,11 @@ import java.net.URL;
 import java.net.UnknownHostException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
+
 
 public class Downloader {
+
+    private static final Logger log = LoggerFactory.getLogger(Downloader.class);
 
     private final DownloadBuilder downloadBuilder;
     private boolean followRedirects = false;
@@ -35,11 +40,10 @@ public class Downloader {
         return this;
     }
 
+    private static final ExecutorService threadPool = Executors.newFixedThreadPool(4, new DownloadThread());
 
     public void asyncDownload() {
-        ExecutorService threadPool = Executors.newFixedThreadPool(2, new DownloadThread());
-        Future<?> ignored = threadPool.submit(this::download);
-
+        threadPool.submit(this::download);
         threadPool.shutdown();
     }
 
@@ -84,7 +88,20 @@ public class Downloader {
 
                 ProgressObservableInputStream stream = new ProgressObservableInputStream(in, connection.getContentLength());
 
+                File file = new File(downloadBuilder.getPath() +  System.getProperty("file.separator") + downloadBuilder.getFileName());
+
+                if(!file.exists()) {
+                    if (!file.getParentFile().exists()) {
+                        if (file.getParentFile().mkdirs()) log.info("Criando pastas...");
+                    }
+
+                    if(file.createNewFile())
+                        log.info("Criando arquivos...");
+                }
+
                 FileOutputStream out = new FileOutputStream(downloadBuilder.getPath() + System.getProperty("file.separator") + downloadBuilder.getFileName());
+
+                log.info("Iniciando download do arquivo {}", downloadBuilder.getFileName());
 
                 byte[] buffer = new byte[4096];
                 int read;

@@ -12,6 +12,16 @@ version ver.toString()
 sourceCompatibility = 11
 targetCompatibility = 11
 
+repositories {
+    mavenCentral()
+    mavenLocal()
+}
+
+dependencies {
+    implementation 'org.slf4j:slf4j-api:1.7.25'
+    implementation 'ch.qos.logback:logback-classic:1.2.3'
+}
+
 shadowJar {
     archiveClassifier.set(null)
     archiveVersion = version
